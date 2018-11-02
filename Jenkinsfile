@@ -11,7 +11,7 @@ pipeline {
         stage('Clean') {
             steps {
                 dir('edge') {
-                    sh "mvn clean"
+                    bat "mvn clean"
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                             usernameVariable: 'apigee_user')]) {
                         script {
                             if (fileExists("resources/edge/env/${params.apigee_env}/caches.json")) {
-                                sh "mvn apigee-config:caches " +
+                                bat "mvn apigee-config:caches " +
                                         "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                                         "    -Dusername=${apigee_user} " +
                                         "    -Dpassword=${apigee_pwd}"
@@ -63,7 +63,7 @@ pipeline {
             stage('Deploy proxy bundle') {
                 steps {
                     dir('edge') {
-                        withCredentials([usernamePassword(credentialsId: "edge-ms-${params.apigee_org}-cred",
+                        withCredentials([usernamePassword(credentialsId: "edge-ms-local-cred",
                                 passwordVariable: 'apigee_pwd',
                                 usernameVariable: 'apigee_user')]) {
                             sh "mvn install -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
