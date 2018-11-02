@@ -34,14 +34,14 @@ pipeline {
 
 
                         if (fileExists("resources/edge/env/${params.apigee_env}/kvms.json")) {
-                            sh "mvn apigee-config:keyvaluemaps " +
+                            bat "mvn apigee-config:keyvaluemaps " +
                                     "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                                     "    -Dusername=${apigee_user} " +
                                     "    -Dpassword=${apigee_pwd}"
                         }
 
                         if (fileExists("resources/edge/env/${params.apigee_env}/targetServers.json")) {
-                            sh "mvn apigee-config:targetservers " +
+                            bat "mvn apigee-config:targetservers " +
                                     "    -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                                     "    -Dusername=${apigee_user} " +
                                     "    -Dpassword=${apigee_pwd}"
@@ -54,7 +54,7 @@ pipeline {
             stage('Build proxy bundle') {
                 steps {
                     dir('edge') {
-                        sh "mvn package -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org}"
+                        bat "mvn package -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org}"
 
                     }
                 }
@@ -66,7 +66,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: "edge-ms-local-cred",
                                 passwordVariable: 'apigee_pwd',
                                 usernameVariable: 'apigee_user')]) {
-                            sh "mvn install -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
+                            bat "mvn install -Papigee -Denv=${params.apigee_env} -Dorg=${params.apigee_org} " +
                                     " -Dusername=${apigee_user} -Dpassword=${apigee_pwd}"
                         }
                     }
