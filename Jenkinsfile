@@ -10,7 +10,8 @@ pipeline {
     stages {
         stage('init'){
             steps {
-                //deletedir() }
+                //deletedir() 
+            }
         }
         stage('Clean') {
             steps {
