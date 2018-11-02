@@ -8,6 +8,10 @@ pipeline {
         nodejs 'NodeJS'
     }
     stages {
+        stage('init'){
+            steps {
+                deletedir() }
+        }
         stage('Clean') {
             steps {
                 dir('edge') {
