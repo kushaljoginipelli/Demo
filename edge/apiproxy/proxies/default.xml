@@ -40,9 +40,7 @@
         <Flow name="UpdateProducts">
             <Description/>
             <Request>
-                <Step>
-                    <Name>KeyValueMap</Name>
-                </Step>
+                
                 <Step>
                     <Name>BasicAuthentication</Name>
                 </Step>
@@ -66,9 +64,7 @@
         <Flow name="DeleteProduct">
             <Description/>
             <Request>
-                <Step>
-                    <Name>KeyValueMap</Name>
-                </Step>
+                
                 <Step>
                     <Name>BasicAuthentication</Name>
                 </Step>
